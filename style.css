@@ -1,0 +1,45 @@
+:root {
+  --text: #022210;
+  --background: #f1fef6;
+  --primary: #18f281;
+  --secondary: #82bff7;
+  --accent: #4358f4;
+}
+.dark-mode {
+  --text: #ddfdeb;
+  --background: #010e06;
+  --primary: #0de777;
+  --secondary: #08447d;
+  --accent: #0b20bc;
+}
+
+body {
+  font-family: 'Inter', serif;
+  background-color: var(--background);
+  color: var(--text);
+}
+
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: var(--primary);
+  color: var(--text);
+  border-radius: 5rem;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  transition: transform 0.1s ease-in-out;
+}
+
+.material-symbols-outlined {
+  margin-right: 0.5rem;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+button:active {
+  transform: scale(0.95);
+}
