@@ -19,6 +19,12 @@ body {
   color: var(--text);
 }
 
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 button {
   display: flex;
   justify-content: center;
@@ -30,6 +36,11 @@ button {
   padding: 1rem 2rem;
   cursor: pointer;
   transition: transform 0.1s ease-in-out;
+  margin: 1rem;
+}
+
+img {
+  border-radius: 1rem;
 }
 
 .material-symbols-outlined {
@@ -49,4 +60,17 @@ button:active,
 #darkMode {
   cursor: pointer;
   transition: transform 0.1s ease-in-out;
+}
+
+.movieArea {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+}
+
+.movieCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
