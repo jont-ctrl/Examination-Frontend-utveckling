@@ -4,6 +4,7 @@
   --primary: #18f281;
   --secondary: #82bff7;
   --accent: #4358f4;
+  --btn-text: #022210;
 }
 .dark-mode {
   --text: #ddfdeb;
@@ -11,6 +12,7 @@
   --primary: #0de777;
   --secondary: #08447d;
   --accent: #0b20bc;
+  --btn-text: #022210;
 }
 
 body {
@@ -33,7 +35,7 @@ button {
   align-items: center;
   border: none;
   background-color: var(--primary);
-  color: var(--text);
+  color: var(--btn-text);
   border-radius: 5rem;
   padding: 1rem 2rem;
   cursor: pointer;

@@ -15,6 +15,7 @@ darkMode.addEventListener('click', () => {
 let movies = [];
 let favorites = [];
 console.log(movies);
+
 // Api fetch
 const apiKi = 'b43ebaaf';
 
@@ -26,6 +27,7 @@ async function getMovies() {
     const data = await response.json();
     console.log(data);
 
+    // Create elements and append
     data.Search.forEach((element) => {
       const newDiv = document.createElement('div');
       newDiv.classList.add('movieCard');
@@ -44,16 +46,6 @@ async function getMovies() {
       newDiv.append(newMovieTitle, newImagePoster, newReadMoreBtn);
       movieArea.append(newDiv);
     });
-
-    /*     const newDiv = document.createElement('div');
-    newDiv.classList.add('movieCard');
-
-    const newMovieTitle = document.createElement('h2');
-    newMovieTitle.classList.add('movieTitle');
-    newMovieTitle.textContent = data.Search[0].Title;
-
-    newDiv.append(newMovieTitle);
-    main.append(newDiv); */
   } catch (error) {
     console.error('Error occured: ', error);
   }
