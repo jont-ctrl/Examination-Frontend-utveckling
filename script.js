@@ -38,11 +38,10 @@ async function getMovies(search = 'spider-man') {
     console.log(data);
 
     if (data.Response === 'False') {
-      console.log('Movie not found, try different search.');
-
       const newError = document.createElement('h2');
       newError.textContent = 'Ingen film hittades, testa annan sökning.';
       newError.classList.add('movieCard');
+      newError.id = 'errorTxt';
       console.log(movieArea);
 
       movieArea.append(newError);

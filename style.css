@@ -43,6 +43,26 @@ button {
   margin: 1rem;
 }
 
+#searchField {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input {
+  border: solid 1px black;
+  border-radius: 5rem;
+  padding: 1rem 2rem;
+}
+
+#searchBtn {
+  margin-left: 0.5rem;
+  cursor: pointer;
+  transition: transform 0.1s ease-in-out;
+  background-color: var(--text);
+  color: var(--background);
+}
+
 img {
   border-radius: 1rem;
 }
@@ -52,12 +72,14 @@ img {
 }
 
 button:hover,
-#darkMode:hover {
+#darkMode:hover,
+#searchBtn:hover {
   transform: scale(1.05);
 }
 
 button:active,
-#darkMode:active {
+#darkMode:active,
+#searchBtn:active {
   transform: scale(0.95);
 }
 
@@ -77,4 +99,9 @@ button:active,
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+#errorTxt {
+  grid-column-start: 1;
+  grid-column-end: 4;
 }
