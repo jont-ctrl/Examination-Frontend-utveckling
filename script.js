@@ -60,20 +60,22 @@ async function getMovies(search = 'spider-man') {
       newImagePoster.classList.add('moviePoster');
       newImagePoster.src = element.Poster;
 
+      const newBtnsDiv = document.createElement('div');
+      newBtnsDiv.classList.add('movieBtns');
+
       const newReadMoreBtn = document.createElement('button');
       newReadMoreBtn.textContent = 'Läs mer';
 
       const newFavoriteBtn = document.createElement('button');
+      newFavoriteBtn.id = 'favoriteBtn';
       newFavoriteBtn.textContent = '';
       newFavoriteBtn.innerHTML =
         '<span class="material-symbols-outlined">favorite</span>';
+      newFavoriteBtn.addEventListener('click', addFavorite);
 
-      newDiv.append(
-        newMovieTitle,
-        newImagePoster,
-        newReadMoreBtn,
-        newFavoriteBtn
-      );
+      newBtnsDiv.append(newReadMoreBtn, newFavoriteBtn);
+
+      newDiv.append(newMovieTitle, newImagePoster, newBtnsDiv);
       movieArea.append(newDiv);
     });
   } catch (error) {
@@ -91,3 +93,7 @@ searchField.addEventListener('submit', (event) => {
   getMovies(searchInput.value);
   searchInput.value = '';
 });
+
+function addFavorite() {
+  console.log('HEJEJE');
+}

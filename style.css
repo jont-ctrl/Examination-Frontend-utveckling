@@ -27,6 +27,8 @@ header {
   align-items: center;
   padding-left: 1rem;
   padding-right: 1rem;
+  max-width: 1200px;
+  margin: auto;
 }
 
 button {
@@ -41,6 +43,7 @@ button {
   cursor: pointer;
   transition: transform 0.1s ease-in-out;
   margin: 1rem;
+  font-size: 1rem;
 }
 
 #searchField {
@@ -69,7 +72,20 @@ img {
 }
 
 .material-symbols-outlined {
-  /*  margin-right: 0.5rem; */
+  /* margin-right: 0.5rem; */
+  font-size: 1rem !important;
+}
+
+.movieBtns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#favoriteBtn {
+  background-color: var(--text);
+  color: var(--background);
+  padding: 1rem 1rem;
 }
 
 button:hover,
@@ -87,12 +103,15 @@ button:active,
 #darkMode {
   cursor: pointer;
   transition: transform 0.1s ease-in-out;
+  font-size: 2rem !important;
 }
 
 .movieArea {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 2rem;
+  max-width: 1200px;
+  margin: auto;
 }
 
 .movieCard {
@@ -105,4 +124,15 @@ button:active,
 #errorTxt {
   grid-column-start: 1;
   grid-column-end: 4;
+}
+
+@media (max-width: 970px) {
+  .movieArea {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 768px) {
+  .movieArea {
+    grid-template-columns: 1fr;
+  }
 }
