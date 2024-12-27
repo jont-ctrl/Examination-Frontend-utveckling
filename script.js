@@ -21,7 +21,8 @@ console.log(movies);
 // Api fetch
 const apiKi = 'b43ebaaf';
 
-async function getMovies(search) {
+// Default search '= x'
+async function getMovies(search = 'spider-man') {
   try {
     console.log('KÖR: ', search);
 
@@ -30,6 +31,15 @@ async function getMovies(search) {
     );
     const data = await response.json();
     console.log(data);
+
+    if (data.Response === 'False') {
+      console.log('Movie not found, try different search.');
+    }
+
+    // Clearing movieCard div before adding new elements
+    if (document.querySelector('.movieCard')) {
+      movieArea.innerHTML = '';
+    }
 
     // Create elements and append
     data.Search.forEach((element) => {
@@ -54,12 +64,14 @@ async function getMovies(search) {
     console.error('Error occured: ', error);
   }
 }
-
-getMovies('movie');
+// Default homepage search
+addEventListener('DOMContentLoaded', () => {
+  getMovies();
+});
 
 searchField.addEventListener('submit', (event) => {
   event.preventDefault();
-  console.log('hello');
+
   console.log(searchInput.value);
 
   getMovies(searchInput.value);
