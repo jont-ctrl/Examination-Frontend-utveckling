@@ -17,7 +17,7 @@ darkMode.addEventListener('click', () => {
 
 let movies = [];
 let favorites = [];
-console.log(movies);
+console.log(favorites);
 
 // Api fetch
 const apiKi = 'b43ebaaf';
@@ -111,11 +111,14 @@ async function getMovies(search = 'spider-man') {
 
 console.log(movies);
 
-// Default homepage search
+// Siteloaded default homepage search
 addEventListener('DOMContentLoaded', () => {
   getMovies();
+  getFavLocal();
+  updateFavTabText();
 });
 
+// Search field form
 searchField.addEventListener('submit', (event) => {
   event.preventDefault();
 
@@ -123,6 +126,7 @@ searchField.addEventListener('submit', (event) => {
   searchInput.value = '';
 });
 
+// Add favorite function
 function addFavorite(indexMovie) {
   console.log('HEJEJE', indexMovie);
 
@@ -134,40 +138,35 @@ function addFavorite(indexMovie) {
     uniqueID: Date.now(),
   };
 
+  console.log('WTFF', favorites);
+
   favorites.push(favoriteMovies);
   console.log(favorites);
 
-  favoriteTab.innerHTML =
-    '<span class="material-icons">favorite</span> Favoriter ' +
-    favorites.length;
+  updateFavTabText();
+  saveFavLocal();
 }
 
+// Remove favorites
 function removeFavorite(removeMovie) {
   console.log('removed', removeMovie);
   console.log(favorites);
   favorites = favorites.filter((favo) => favo.imdbID !== removeMovie);
   console.log(favorites);
 
-  favoriteTab.innerHTML =
-    '<span class="material-icons">favorite</span> Favoriter ' +
-    favorites.length;
+  updateFavTabText();
+  saveFavLocal();
 }
 
+// Favorite tab
 favoriteTab.addEventListener('click', () => {
   // Clearing movieCard div before adding new elements
   if (document.querySelector('.movieCard')) {
     movieArea.innerHTML = '';
   }
 
-  // If no favorites in favorite array show error message
-  if (favorites.length === 0) {
-    const newError = document.createElement('h2');
-    newError.textContent = 'Inga favoriter hittades, testa favorisera en film.';
-    newError.classList.add('movieCard');
-    newError.id = 'errorTxt';
-    console.log(movieArea);
-    movieArea.append(newError);
-  }
+  let favoriteFromLocal = localStorage.getItem('savedFavorites');
+  favorites = JSON.parse(favoriteFromLocal);
 
   // Render and append items from favorites array
   favorites.forEach((element) => {
@@ -196,4 +195,36 @@ favoriteTab.addEventListener('click', () => {
 
     console.log(element.title);
   });
+
+  // If no favorites in favorite array show error message
+  if (favorites.length === 0) {
+    const newError = document.createElement('h2');
+    newError.textContent = 'Inga favoriter hittades, testa favorisera en film.';
+    newError.classList.add('movieCard');
+    newError.id = 'errorTxt';
+    console.log(movieArea);
+    movieArea.append(newError);
+  }
 });
+
+function saveFavLocal() {
+  const saveFavoriteLocalStorage = JSON.stringify(favorites);
+  localStorage.setItem('savedFavorites', saveFavoriteLocalStorage);
+}
+
+function getFavLocal() {
+  let favoriteFromLocal = localStorage.getItem('savedFavorites');
+
+  // If null localstorage set to empty array
+  if (favoriteFromLocal) {
+    favorites = JSON.parse(favoriteFromLocal);
+  } else {
+    favorites = [];
+  }
+}
+
+function updateFavTabText() {
+  favoriteTab.innerHTML =
+    '<span class="material-icons">favorite</span> Favoriter ' +
+    favorites.length;
+}
