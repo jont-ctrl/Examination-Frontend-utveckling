@@ -1,6 +1,8 @@
 const darkMode = document.querySelector('#darkMode');
 const main = document.querySelector('main');
 const movieArea = document.querySelector('.movieArea');
+const searchField = document.querySelector('#searchField');
+const searchInput = document.querySelector('#searchInput');
 
 darkMode.addEventListener('click', () => {
   if (document.body.classList.contains('dark-mode')) {
@@ -19,10 +21,12 @@ console.log(movies);
 // Api fetch
 const apiKi = 'b43ebaaf';
 
-async function getMovies() {
+async function getMovies(search) {
   try {
+    console.log('KÖR: ', search);
+
     const response = await fetch(
-      `http://www.omdbapi.com/?apikey=${apiKi}&s=movie`
+      `http://www.omdbapi.com/?apikey=${apiKi}&s=${search}`
     );
     const data = await response.json();
     console.log(data);
@@ -51,4 +55,13 @@ async function getMovies() {
   }
 }
 
-getMovies();
+getMovies('movie');
+
+searchField.addEventListener('submit', (event) => {
+  event.preventDefault();
+  console.log('hello');
+  console.log(searchInput.value);
+
+  getMovies(searchInput.value);
+  searchInput.value = '';
+});
