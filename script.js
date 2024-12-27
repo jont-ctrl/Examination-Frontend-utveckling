@@ -23,6 +23,11 @@ const apiKi = 'b43ebaaf';
 
 // Default search '= x'
 async function getMovies(search = 'spider-man') {
+  // Clearing movieCard div before adding new elements
+  if (document.querySelector('.movieCard')) {
+    movieArea.innerHTML = '';
+  }
+
   try {
     console.log('KÖR: ', search);
 
@@ -34,11 +39,13 @@ async function getMovies(search = 'spider-man') {
 
     if (data.Response === 'False') {
       console.log('Movie not found, try different search.');
-    }
 
-    // Clearing movieCard div before adding new elements
-    if (document.querySelector('.movieCard')) {
-      movieArea.innerHTML = '';
+      const newError = document.createElement('h2');
+      newError.textContent = 'Ingen film hittades, testa annan sökning.';
+      newError.classList.add('movieCard');
+      console.log(movieArea);
+
+      movieArea.append(newError);
     }
 
     // Create elements and append
@@ -71,8 +78,6 @@ addEventListener('DOMContentLoaded', () => {
 
 searchField.addEventListener('submit', (event) => {
   event.preventDefault();
-
-  console.log(searchInput.value);
 
   getMovies(searchInput.value);
   searchInput.value = '';
