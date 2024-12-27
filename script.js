@@ -63,7 +63,17 @@ async function getMovies(search = 'spider-man') {
       const newReadMoreBtn = document.createElement('button');
       newReadMoreBtn.textContent = 'Läs mer';
 
-      newDiv.append(newMovieTitle, newImagePoster, newReadMoreBtn);
+      const newFavoriteBtn = document.createElement('button');
+      newFavoriteBtn.textContent = '';
+      newFavoriteBtn.innerHTML =
+        '<span class="material-symbols-outlined">favorite</span>';
+
+      newDiv.append(
+        newMovieTitle,
+        newImagePoster,
+        newReadMoreBtn,
+        newFavoriteBtn
+      );
       movieArea.append(newDiv);
     });
   } catch (error) {
