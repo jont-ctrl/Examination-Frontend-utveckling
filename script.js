@@ -3,6 +3,7 @@ const main = document.querySelector('main');
 const movieArea = document.querySelector('.movieArea');
 const searchField = document.querySelector('#searchField');
 const searchInput = document.querySelector('#searchInput');
+const favoriteTab = document.querySelector('#favoriteTab');
 
 darkMode.addEventListener('click', () => {
   if (document.body.classList.contains('dark-mode')) {
@@ -37,6 +38,9 @@ async function getMovies(search = 'spider-man') {
     const data = await response.json();
     console.log(data);
 
+    movies = data;
+
+    // If no movies found using search display error message
     if (data.Response === 'False') {
       const newError = document.createElement('h2');
       newError.textContent = 'Ingen film hittades, testa annan sökning.';
@@ -71,7 +75,12 @@ async function getMovies(search = 'spider-man') {
       newFavoriteBtn.textContent = '';
       newFavoriteBtn.innerHTML =
         '<span class="material-symbols-outlined">favorite</span>';
-      newFavoriteBtn.addEventListener('click', addFavorite);
+      newFavoriteBtn.addEventListener('click', () => {
+        addFavorite(element);
+
+        newFavoriteBtn.innerHTML =
+          '<span class="material-icons">favorite</span>';
+      });
 
       newBtnsDiv.append(newReadMoreBtn, newFavoriteBtn);
 
@@ -82,6 +91,9 @@ async function getMovies(search = 'spider-man') {
     console.error('Error occured: ', error);
   }
 }
+
+console.log(movies);
+
 // Default homepage search
 addEventListener('DOMContentLoaded', () => {
   getMovies();
@@ -94,6 +106,58 @@ searchField.addEventListener('submit', (event) => {
   searchInput.value = '';
 });
 
-function addFavorite() {
-  console.log('HEJEJE');
+function addFavorite(indexMovie) {
+  console.log('HEJEJE', indexMovie);
+
+  let favoriteMovies = {
+    title: indexMovie.Title,
+    year: indexMovie.Year,
+    imdbID: indexMovie.imdbID,
+    poster: indexMovie.Poster,
+  };
+
+  favorites.push(favoriteMovies);
+  console.log(favorites);
+
+  /*   const favoritesLength = document.createElement('p');
+  favoritesLength.textContent = favorites.length;
+  document.querySelector('#favoriteTab').append(favoritesLength);
+ */
+  favoriteTab.innerHTML =
+    '<span class="material-icons">favorite</span> Favoriter ' +
+    favorites.length;
 }
+
+favoriteTab.addEventListener('click', () => {
+  // Clearing movieCard div before adding new elements
+  if (document.querySelector('.movieCard')) {
+    movieArea.innerHTML = '';
+  }
+
+  favorites.forEach((element) => {
+    const newDiv = document.createElement('div');
+    newDiv.classList.add('movieCard');
+
+    const newMovieTitle = document.createElement('h2');
+    newMovieTitle.classList.add('movieTitle');
+    newMovieTitle.textContent = element.title;
+
+    const newImagePoster = document.createElement('img');
+    newImagePoster.classList.add('moviePoster');
+    newImagePoster.src = element.poster;
+
+    const newBtnsDiv = document.createElement('div');
+    newBtnsDiv.classList.add('movieBtns');
+
+    const newReadMoreBtn = document.createElement('button');
+    newReadMoreBtn.textContent = 'Läs mer';
+
+    newBtnsDiv.append(newReadMoreBtn);
+
+    newDiv.append(newMovieTitle, newImagePoster, newBtnsDiv);
+
+    movieArea.append(newDiv);
+
+    console.log(element.title);
+  });
+});

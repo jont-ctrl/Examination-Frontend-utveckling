@@ -31,6 +31,11 @@ header {
   margin: auto;
 }
 
+#headerTitle a {
+  text-decoration: none;
+  color: var(--text);
+}
+
 button {
   display: flex;
   justify-content: center;
@@ -52,6 +57,12 @@ button {
   align-items: center;
 }
 
+.buttonsNav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 input {
   border: solid 1px black;
   border-radius: 5rem;
@@ -64,15 +75,24 @@ input {
   transition: transform 0.1s ease-in-out;
   background-color: var(--text);
   color: var(--background);
-  padding: 0.75rem 2rem;
+  /*   padding: 0.75rem 2rem; */
+}
+
+#favoriteTab {
+  cursor: pointer;
+  transition: transform 0.1s ease-in-out;
+  background-color: var(--text);
+  color: var(--background);
+  padding: 0.5rem 2rem;
 }
 
 img {
   border-radius: 1rem;
 }
 
-.material-symbols-outlined {
-  /* margin-right: 0.5rem; */
+.material-symbols-outlined,
+.material-icons {
+  margin-right: 0.5rem;
   font-size: 1rem !important;
 }
 
@@ -86,6 +106,11 @@ img {
   background-color: var(--text);
   color: var(--background);
   padding: 1rem 1rem;
+}
+
+#favoriteBtn .material-symbols-outlined,
+#favoriteBtn .material-icons {
+  margin-right: 0rem;
 }
 
 button:hover,
