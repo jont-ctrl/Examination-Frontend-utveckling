@@ -9,9 +9,11 @@ darkMode.addEventListener('click', () => {
   if (document.body.classList.contains('dark-mode')) {
     document.body.classList.remove('dark-mode');
     darkMode.textContent = 'dark_mode';
+    localStorage.setItem('darkMode', 'false');
   } else {
     document.body.classList.add('dark-mode');
     darkMode.textContent = 'light_mode';
+    localStorage.setItem('darkMode', 'true');
   }
 });
 
@@ -77,7 +79,19 @@ async function getMovies(search = 'spider-man') {
       newFavoriteBtn.innerHTML =
         '<span class="material-symbols-outlined">favorite</span>';
 
+      console.log('favorites:', favorites);
+
       let isFavorited = false;
+
+      // check if movie already favorited, some returns true/false instead of .filter
+      if (favorites.some((fav) => fav.imdbID === element.imdbID)) {
+        console.log('TRUE Finns id redan');
+        isFavorited = true;
+        newFavoriteBtn.innerHTML =
+          '<span class="material-icons">favorite</span>';
+      } else {
+        console.log('FALSE ID FINNS EJ REDAN');
+      }
 
       newFavoriteBtn.addEventListener('click', () => {
         if (isFavorited === true) {
@@ -116,6 +130,19 @@ addEventListener('DOMContentLoaded', () => {
   getMovies();
   getFavLocal();
   updateFavTabText();
+
+  // Dark/light mode from localstorage
+  console.log(typeof localStorage.getItem('darkMode'));
+
+  if (localStorage.getItem('darkMode') === 'true') {
+    console.log('dark mode ON');
+    document.body.classList.add('dark-mode');
+    darkMode.textContent = 'light_mode';
+  } else {
+    console.log('dark mode OFF');
+    document.body.classList.remove('dark-mode');
+    darkMode.textContent = 'dark_mode';
+  }
 });
 
 // Search field form
@@ -165,8 +192,7 @@ favoriteTab.addEventListener('click', () => {
     movieArea.innerHTML = '';
   }
 
-  let favoriteFromLocal = localStorage.getItem('savedFavorites');
-  favorites = JSON.parse(favoriteFromLocal);
+  getFavLocal();
 
   // Render and append items from favorites array
   favorites.forEach((element) => {
@@ -215,7 +241,7 @@ function saveFavLocal() {
 function getFavLocal() {
   let favoriteFromLocal = localStorage.getItem('savedFavorites');
 
-  // If null localstorage set to empty array
+  // If null localstorage set to empty array, else get localstorage convert to object and save to favorites array
   if (favoriteFromLocal) {
     favorites = JSON.parse(favoriteFromLocal);
   } else {
