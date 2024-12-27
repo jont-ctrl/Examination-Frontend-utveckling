@@ -134,6 +134,16 @@ favoriteTab.addEventListener('click', () => {
     movieArea.innerHTML = '';
   }
 
+  if (favorites.length === 0) {
+    const newError = document.createElement('h2');
+    newError.textContent = 'Inga favoriter hittades, testa favorisera en film.';
+    newError.classList.add('movieCard');
+    newError.id = 'errorTxt';
+    console.log(movieArea);
+
+    movieArea.append(newError);
+  }
+
   favorites.forEach((element) => {
     const newDiv = document.createElement('div');
     newDiv.classList.add('movieCard');
