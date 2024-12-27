@@ -70,18 +70,35 @@ async function getMovies(search = 'spider-man') {
       const newReadMoreBtn = document.createElement('button');
       newReadMoreBtn.textContent = 'Läs mer';
 
+      // Favorite button
       const newFavoriteBtn = document.createElement('button');
       newFavoriteBtn.id = 'favoriteBtn';
       newFavoriteBtn.textContent = '';
       newFavoriteBtn.innerHTML =
         '<span class="material-symbols-outlined">favorite</span>';
-      newFavoriteBtn.addEventListener('click', () => {
-        addFavorite(element);
 
-        newFavoriteBtn.innerHTML =
-          '<span class="material-icons">favorite</span>';
+      let isFavorited = false;
+
+      newFavoriteBtn.addEventListener('click', () => {
+        if (isFavorited === true) {
+          // Remove favorite
+
+          isFavorited = false;
+          removeFavorite(element.imdbID);
+
+          newFavoriteBtn.innerHTML =
+            '<span class="material-symbols-outlined">favorite</span>';
+        } else {
+          // Add favorite
+
+          isFavorited = true;
+          addFavorite(element);
+          newFavoriteBtn.innerHTML =
+            '<span class="material-icons">favorite</span>';
+        }
       });
 
+      //Append elements
       newBtnsDiv.append(newReadMoreBtn, newFavoriteBtn);
 
       newDiv.append(newMovieTitle, newImagePoster, newBtnsDiv);
@@ -114,15 +131,23 @@ function addFavorite(indexMovie) {
     year: indexMovie.Year,
     imdbID: indexMovie.imdbID,
     poster: indexMovie.Poster,
+    uniqueID: Date.now(),
   };
 
   favorites.push(favoriteMovies);
   console.log(favorites);
 
-  /*   const favoritesLength = document.createElement('p');
-  favoritesLength.textContent = favorites.length;
-  document.querySelector('#favoriteTab').append(favoritesLength);
- */
+  favoriteTab.innerHTML =
+    '<span class="material-icons">favorite</span> Favoriter ' +
+    favorites.length;
+}
+
+function removeFavorite(removeMovie) {
+  console.log('removed', removeMovie);
+  console.log(favorites);
+  favorites = favorites.filter((favo) => favo.imdbID !== removeMovie);
+  console.log(favorites);
+
   favoriteTab.innerHTML =
     '<span class="material-icons">favorite</span> Favoriter ' +
     favorites.length;
@@ -134,16 +159,17 @@ favoriteTab.addEventListener('click', () => {
     movieArea.innerHTML = '';
   }
 
+  // If no favorites in favorite array show error message
   if (favorites.length === 0) {
     const newError = document.createElement('h2');
     newError.textContent = 'Inga favoriter hittades, testa favorisera en film.';
     newError.classList.add('movieCard');
     newError.id = 'errorTxt';
     console.log(movieArea);
-
     movieArea.append(newError);
   }
 
+  // Render and append items from favorites array
   favorites.forEach((element) => {
     const newDiv = document.createElement('div');
     newDiv.classList.add('movieCard');
