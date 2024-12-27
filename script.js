@@ -32,8 +32,6 @@ async function getMovies(search = 'spider-man') {
   }
 
   try {
-    console.log('KÖR: ', search);
-
     const response = await fetch(
       `http://www.omdbapi.com/?apikey=${apiKi}&s=${search}`
     );
@@ -132,14 +130,10 @@ addEventListener('DOMContentLoaded', () => {
   updateFavTabText();
 
   // Dark/light mode from localstorage
-  console.log(typeof localStorage.getItem('darkMode'));
-
   if (localStorage.getItem('darkMode') === 'true') {
-    console.log('dark mode ON');
     document.body.classList.add('dark-mode');
     darkMode.textContent = 'light_mode';
   } else {
-    console.log('dark mode OFF');
     document.body.classList.remove('dark-mode');
     darkMode.textContent = 'dark_mode';
   }
@@ -155,8 +149,6 @@ searchField.addEventListener('submit', (event) => {
 
 // Add favorite function
 function addFavorite(indexMovie) {
-  console.log('HEJEJE', indexMovie);
-
   let favoriteMovies = {
     title: indexMovie.Title,
     year: indexMovie.Year,
@@ -165,10 +157,7 @@ function addFavorite(indexMovie) {
     uniqueID: Date.now(),
   };
 
-  console.log('WTFF', favorites);
-
   favorites.push(favoriteMovies);
-  console.log(favorites);
 
   updateFavTabText();
   saveFavLocal();
@@ -176,10 +165,7 @@ function addFavorite(indexMovie) {
 
 // Remove favorites
 function removeFavorite(removeMovie) {
-  console.log('removed', removeMovie);
-  console.log(favorites);
   favorites = favorites.filter((favo) => favo.imdbID !== removeMovie);
-  console.log(favorites);
 
   updateFavTabText();
   saveFavLocal();
