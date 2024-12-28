@@ -1,6 +1,7 @@
 const darkMode = document.querySelector('#darkMode');
 const main = document.querySelector('main');
 const movieArea = document.querySelector('.movieArea');
+const fullMovieArea = document.querySelector('.fullMovieArea');
 const searchField = document.querySelector('#searchField');
 const searchInput = document.querySelector('#searchInput');
 const favoriteTab = document.querySelector('#favoriteTab');
@@ -69,6 +70,9 @@ async function getMovies(search = 'spider-man') {
 
       const newReadMoreBtn = document.createElement('button');
       newReadMoreBtn.textContent = 'Läs mer';
+      newReadMoreBtn.addEventListener('click', () => {
+        readMore(element.imdbID);
+      });
 
       // Favorite button
       const newFavoriteBtn = document.createElement('button');
@@ -278,4 +282,38 @@ function updateFavTabText() {
   favoriteTab.innerHTML =
     '<span class="material-icons">favorite</span> Favoriter ' +
     favorites.length;
+}
+
+// Read more movie full view
+async function readMore(movieID) {
+  try {
+    const response = await fetch(
+      `http://www.omdbapi.com/?i=${movieID}&plot=full&apikey=${apiKi}`
+    );
+    const data = await response.json();
+
+    // Clearing movieCard div before adding new elements
+    if (document.querySelector('.movieCard')) {
+      movieArea.innerHTML = '';
+    }
+    // Create all elements
+    const newDiv = document.createElement('div');
+    newDiv.classList.add('fullMovie');
+
+    const newTitle = document.createElement('h2');
+    newTitle.id = 'fullMovieH2';
+    newTitle.textContent = data.Title;
+
+    const newImagePoster = document.createElement('img');
+    newImagePoster.classList.add('fullMoviePoster');
+    newImagePoster.src = data.Poster;
+
+    // Append all items
+    //newDiv.append(newTitle, newImagePoster);
+    fullMovieArea.append(newTitle, newImagePoster);
+
+    console.log(data);
+  } catch (error) {
+    console.error('Error read more fetch: ', error);
+  }
 }

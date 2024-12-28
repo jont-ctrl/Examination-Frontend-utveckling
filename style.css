@@ -151,6 +151,17 @@ button:active,
   grid-column-end: 4;
 }
 
+.fullMovieArea {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#fullMovieH2 {
+  font-size: 3rem;
+}
+
 @media (max-width: 970px) {
   .movieArea {
     grid-template-columns: 1fr 1fr;
