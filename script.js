@@ -308,9 +308,53 @@ async function readMore(movieID) {
     newImagePoster.classList.add('fullMoviePoster');
     newImagePoster.src = data.Poster;
 
+    const newActorstxt = document.createElement('p');
+    newActorstxt.id = 'actorsTxt';
+    newActorstxt.textContent = `Actors: ${data.Actors}`;
+
+    const yearRelease = document.createElement('p');
+    yearRelease.id = 'yearRelease';
+    yearRelease.textContent = `Released: ${data.Released} `;
+
+    const movieLength = document.createElement('p');
+    movieLength.id = 'movieLength';
+    movieLength.textContent = `Runtime: ${data.Runtime}`;
+
+    const movieAwards = document.createElement('p');
+    movieAwards.id = 'movieAwards';
+    movieAwards.textContent = `Awards: ${data.Awards}`;
+
+    const moviePlot = document.createElement('p');
+    moviePlot.id = 'moviePlot';
+    moviePlot.textContent = `${data.Plot}`;
+
+    const ratingIMDB = document.createElement('h2');
+    ratingIMDB.id = 'ratingIMDB';
+    ratingIMDB.textContent = `⭐ ${data.imdbRating} (${data.imdbVotes})`;
+
+    const movieGenre = document.createElement('p');
+    movieGenre.id = 'movieGenre';
+    movieGenre.textContent = `Genre: ${data.Genre}`;
+
+    const boxOffice = document.createElement('p');
+    boxOffice.id = 'boxOffice';
+    boxOffice.textContent = `Boxoffice: 💵 ${data.BoxOffice}`;
+
     // Append all items
     //newDiv.append(newTitle, newImagePoster);
-    fullMovieArea.append(newTitle, newImagePoster);
+    fullMovieArea.append(
+      newTitle,
+      ratingIMDB,
+      newImagePoster,
+      moviePlot,
+      yearRelease,
+      movieGenre,
+      movieLength,
+      movieAwards,
+      newActorstxt,
+
+      boxOffice
+    );
 
     console.log(data);
   } catch (error) {
