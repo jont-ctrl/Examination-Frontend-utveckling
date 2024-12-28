@@ -199,7 +199,46 @@ favoriteTab.addEventListener('click', () => {
     const newReadMoreBtn = document.createElement('button');
     newReadMoreBtn.textContent = 'Läs mer';
 
-    newBtnsDiv.append(newReadMoreBtn);
+    // Favorite button
+    const newFavoriteBtn = document.createElement('button');
+    newFavoriteBtn.id = 'favoriteBtn';
+    newFavoriteBtn.textContent = '';
+    newFavoriteBtn.innerHTML =
+      '<span class="material-symbols-outlined">favorite</span>';
+
+    console.log('favorites:', favorites);
+
+    let isFavorited = false;
+
+    // check if movie already favorited, some returns true/false instead of .filter
+    if (favorites.some((fav) => fav.imdbID === element.imdbID)) {
+      console.log('TRUE Finns id redan');
+      isFavorited = true;
+      newFavoriteBtn.innerHTML = '<span class="material-icons">favorite</span>';
+    } else {
+      console.log('FALSE ID FINNS EJ REDAN');
+    }
+
+    newFavoriteBtn.addEventListener('click', () => {
+      if (isFavorited === true) {
+        // Remove favorite
+
+        isFavorited = false;
+        removeFavorite(element.imdbID);
+
+        newFavoriteBtn.innerHTML =
+          '<span class="material-symbols-outlined">favorite</span>';
+      } else {
+        // Add favorite
+
+        isFavorited = true;
+        addFavorite(element);
+        newFavoriteBtn.innerHTML =
+          '<span class="material-icons">favorite</span>';
+      }
+    });
+
+    newBtnsDiv.append(newReadMoreBtn, newFavoriteBtn);
 
     newDiv.append(newMovieTitle, newImagePoster, newBtnsDiv);
 
