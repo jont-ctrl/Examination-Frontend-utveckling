@@ -202,6 +202,9 @@ favoriteTab.addEventListener('click', () => {
 
     const newReadMoreBtn = document.createElement('button');
     newReadMoreBtn.textContent = 'Läs mer';
+    newReadMoreBtn.addEventListener('click', () => {
+      readMore(element.imdbID);
+    });
 
     // Favorite button
     const newFavoriteBtn = document.createElement('button');
