@@ -31,6 +31,9 @@ async function getMovies(search = 'spider-man') {
   if (document.querySelector('.movieCard')) {
     movieArea.innerHTML = '';
   }
+  if (document.querySelector('.fullMovieArea')) {
+    fullMovieArea.innerHTML = '';
+  }
 
   try {
     const response = await fetch(
@@ -181,6 +184,9 @@ favoriteTab.addEventListener('click', () => {
   if (document.querySelector('.movieCard')) {
     movieArea.innerHTML = '';
   }
+  if (document.querySelector('.fullMovieArea')) {
+    fullMovieArea.innerHTML = '';
+  }
 
   getFavLocal();
 
@@ -298,6 +304,9 @@ async function readMore(movieID) {
     // Clearing movieCard div before adding new elements
     if (document.querySelector('.movieCard')) {
       movieArea.innerHTML = '';
+    }
+    if (document.querySelector('.fullMovieArea')) {
+      fullMovieArea.innerHTML = '';
     }
     // Create all elements
     const newDiv = document.createElement('div');
