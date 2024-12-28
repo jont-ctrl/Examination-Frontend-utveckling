@@ -62,7 +62,7 @@ async function getMovies(search = 'spider-man') {
 
       const newMovieTitle = document.createElement('h2');
       newMovieTitle.classList.add('movieTitle');
-      newMovieTitle.textContent = element.Title;
+      newMovieTitle.textContent = `${element.Title} (${element.Year})`;
 
       const newImagePoster = document.createElement('img');
       newImagePoster.classList.add('moviePoster');
@@ -197,7 +197,7 @@ favoriteTab.addEventListener('click', () => {
 
     const newMovieTitle = document.createElement('h2');
     newMovieTitle.classList.add('movieTitle');
-    newMovieTitle.textContent = element.title;
+    newMovieTitle.textContent = `${element.title} (${element.year})`;
 
     const newImagePoster = document.createElement('img');
     newImagePoster.classList.add('moviePoster');
