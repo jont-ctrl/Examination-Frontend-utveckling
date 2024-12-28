@@ -19,7 +19,9 @@ body {
   font-family: 'Inter', serif;
   background-color: var(--background);
   color: var(--text);
-  padding: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-bottom: 5rem;
 }
 
 header {
@@ -138,6 +140,8 @@ button:active,
   gap: 2rem;
   max-width: 1200px;
   margin: auto;
+  align-items: center;
+  justify-items: center;
 }
 
 .movieCard {

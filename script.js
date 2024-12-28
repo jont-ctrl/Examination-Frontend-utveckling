@@ -314,7 +314,7 @@ async function readMore(movieID) {
 
     const newTitle = document.createElement('h2');
     newTitle.id = 'fullMovieH2';
-    newTitle.textContent = data.Title;
+    newTitle.textContent = `${data.Title} (${data.Year})`;
 
     const newImagePoster = document.createElement('img');
     newImagePoster.classList.add('fullMoviePoster');
@@ -359,9 +359,9 @@ async function readMore(movieID) {
       ratingIMDB,
       newImagePoster,
       moviePlot,
+      movieLength,
       yearRelease,
       movieGenre,
-      movieLength,
       movieAwards,
       newActorstxt,
 
