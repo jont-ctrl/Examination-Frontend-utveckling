@@ -28,17 +28,29 @@
   <body>
     <header>
       <h1 id="headerTitle"><a href="/index.html">FilmSamlaren</a></h1>
-      <span class="material-symbols-outlined" id="darkMode"> dark_mode </span>
+      <span
+        class="material-symbols-outlined"
+        id="darkMode"
+        aria-label="Växla mellan mörkt och ljust läge"
+      >
+        dark_mode
+      </span>
     </header>
     <main>
       <form id="searchField">
-        <input type="text" name="" id="searchInput" placeholder="Sök film..." />
-        <button type="submit" id="searchBtn">
+        <input
+          type="text"
+          name=""
+          id="searchInput"
+          placeholder="Sök film..."
+          aria-label="Sök film"
+        />
+        <button type="submit" id="searchBtn" aria-label="Sökknapp">
           <span class="material-symbols-outlined">search</span> Sök
         </button>
       </form>
       <div class="buttonsNav">
-        <button id="favoriteTab">
+        <button id="favoriteTab" aria-label="Visa favoriter">
           <span class="material-icons">favorite</span>
           Favoriter
         </button>
