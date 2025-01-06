@@ -197,8 +197,13 @@ favoriteTab.addEventListener('click', () => {
 
   getFavLocal();
 
+  // Main title favorite tab
+  if (document.querySelector('#mainTitleFavorites')) {
+    document.querySelector('#mainTitleFavorites').remove();
+  }
   const mainTitleFavorites = document.createElement('h2');
   mainTitleFavorites.textContent = 'Dina favoriter';
+  mainTitleFavorites.id = 'mainTitleFavorites';
   document.querySelector('.buttonsNav').append(mainTitleFavorites);
 
   // Render and append items from favorites array
@@ -320,6 +325,10 @@ async function readMore(movieID) {
     }
     if (document.querySelector('.fullMovieArea')) {
       fullMovieArea.innerHTML = '';
+    }
+    // Remove Main title favorite tab
+    if (document.querySelector('#mainTitleFavorites')) {
+      document.querySelector('#mainTitleFavorites').remove();
     }
 
     // Create all elements
