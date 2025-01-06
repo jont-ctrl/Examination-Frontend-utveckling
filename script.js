@@ -364,10 +364,50 @@ async function readMore(movieID) {
     boxOffice.id = 'boxOffice';
     boxOffice.textContent = `Boxoffice: 💵 ${data.BoxOffice}`;
 
+    // Favorite button
+    const newFavoriteBtn = document.createElement('button');
+    newFavoriteBtn.id = 'favoriteBtn';
+    newFavoriteBtn.textContent = '';
+    newFavoriteBtn.innerHTML =
+      '<span class="material-symbols-outlined">favorite</span>';
+
+    console.log('favorites:', favorites);
+
+    let isFavorited = false;
+
+    // check if movie already favorited, some returns true/false instead of .filter
+    if (favorites.some((fav) => fav.imdbID === data.imdbID)) {
+      console.log('TRUE Finns id redan');
+      isFavorited = true;
+      newFavoriteBtn.innerHTML = '<span class="material-icons">favorite</span>';
+    } else {
+      console.log('FALSE ID FINNS EJ REDAN');
+    }
+
+    newFavoriteBtn.addEventListener('click', () => {
+      if (isFavorited === true) {
+        // Remove favorite
+
+        isFavorited = false;
+        removeFavorite(data.imdbID);
+
+        newFavoriteBtn.innerHTML =
+          '<span class="material-symbols-outlined">favorite</span>';
+      } else {
+        // Add favorite
+
+        isFavorited = true;
+        addFavorite(data);
+        newFavoriteBtn.innerHTML =
+          '<span class="material-icons">favorite</span>';
+      }
+    });
+
     // Append all items
     //newDiv.append(newTitle, newImagePoster);
     fullMovieArea.append(
       newTitle,
+      newFavoriteBtn,
       ratingIMDB,
       newImagePoster,
       moviePlot,
