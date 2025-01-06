@@ -36,7 +36,7 @@ async function getMovies(search = 'spider-man') {
 
   try {
     const response = await fetch(
-      `http://www.omdbapi.com/?apikey=${apiKi}&s=${search}`
+      `https://www.omdbapi.com/?apikey=${apiKi}&s=${search}`
     );
     const data = await response.json();
     console.log(data);
@@ -306,7 +306,7 @@ function updateFavTabText() {
 async function readMore(movieID) {
   try {
     const response = await fetch(
-      `http://www.omdbapi.com/?i=${movieID}&plot=full&apikey=${apiKi}`
+      `https://www.omdbapi.com/?i=${movieID}&plot=full&apikey=${apiKi}`
     );
     const data = await response.json();
 
