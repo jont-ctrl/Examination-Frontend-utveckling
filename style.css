@@ -157,7 +157,7 @@ button:active,
 }
 
 .fullMovieArea {
-  max-width: 1200px;
+  max-width: 800px;
   margin: auto;
 
   display: flex;
@@ -175,6 +175,7 @@ button:active,
 
 #fullMovieH2 {
   font-size: 3rem;
+  text-align: center;
 }
 
 .fullMoviePoster {

@@ -20,7 +20,6 @@ darkMode.addEventListener('click', () => {
 
 let movies = [];
 let favorites = [];
-console.log(favorites);
 
 // Api fetch
 const apiKi = 'b43ebaaf';
@@ -125,6 +124,12 @@ async function getMovies(search = 'spider-man') {
     });
   } catch (error) {
     console.error('Error occured: ', error);
+    const newError = document.createElement('h2');
+    newError.textContent = 'Något gick fel, försök igen senare.';
+    newError.classList.add('movieCard');
+    newError.id = 'errorTxt';
+
+    movieArea.append(newError);
   }
 }
 
@@ -308,6 +313,7 @@ async function readMore(movieID) {
     if (document.querySelector('.fullMovieArea')) {
       fullMovieArea.innerHTML = '';
     }
+
     // Create all elements
     const newDiv = document.createElement('div');
     newDiv.classList.add('fullMovie');
@@ -371,5 +377,11 @@ async function readMore(movieID) {
     console.log(data);
   } catch (error) {
     console.error('Error read more fetch: ', error);
+    const newError = document.createElement('h2');
+    newError.textContent = 'Något gick fel, försök igen senare.';
+    newError.classList.add('movieCard');
+    newError.id = 'errorTxt';
+
+    movieArea.append(newError);
   }
 }
