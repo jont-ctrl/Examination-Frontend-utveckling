@@ -66,6 +66,8 @@ async function getMovies(search = 'spider-man') {
       const newImagePoster = document.createElement('img');
       newImagePoster.classList.add('moviePoster');
       newImagePoster.src = element.Poster;
+      // Add alt text to image
+      newImagePoster.alt = `${element.Title} film poster`;
 
       const newBtnsDiv = document.createElement('div');
       newBtnsDiv.classList.add('movieBtns');
@@ -207,6 +209,8 @@ favoriteTab.addEventListener('click', () => {
     const newImagePoster = document.createElement('img');
     newImagePoster.classList.add('moviePoster');
     newImagePoster.src = element.poster;
+    // Add alt text to image
+    newImagePoster.alt = `${element.Title} film poster`;
 
     const newBtnsDiv = document.createElement('div');
     newBtnsDiv.classList.add('movieBtns');
@@ -325,6 +329,8 @@ async function readMore(movieID) {
     const newImagePoster = document.createElement('img');
     newImagePoster.classList.add('fullMoviePoster');
     newImagePoster.src = data.Poster;
+    // Add alt text to image
+    newImagePoster.alt = `${data.Title} film poster`;
 
     const newActorstxt = document.createElement('p');
     newActorstxt.id = 'actorsTxt';
