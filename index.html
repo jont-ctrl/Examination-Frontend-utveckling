@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Upptäck och spara dina favoritfilmer med FilmSamlaren."
+    />
+    <title>FilmSamlaren | Utforska Filmer</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=block"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <h1 id="headerTitle"><a href="/index.html">FilmSamlaren</a></h1>
+      <span
+        class="material-symbols-outlined"
+        id="darkMode"
+        aria-label="Växla mellan mörkt och ljust läge"
+      >
+        dark_mode
+      </span>
+    </header>
+    <main>
+      <form id="searchField">
+        <input
+          type="text"
+          name=""
+          id="searchInput"
+          placeholder="Sök film..."
+          aria-label="Sök film"
+        />
+        <button type="submit" id="searchBtn" aria-label="Sökknapp">
+          <span class="material-symbols-outlined">search</span> Sök
+        </button>
+      </form>
+      <div class="buttonsNav">
+        <button id="favoriteTab" aria-label="Visa favoriter">
+          <span class="material-icons">favorite</span>
+          Favoriter
+        </button>
+      </div>
+
+      <div class="movieArea"></div>
+      <div class="fullMovieArea"></div>
+    </main>
+    <footer></footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
