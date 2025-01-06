@@ -56,3 +56,7 @@ Klicka på "Läs mer"-knappen för att få mer information om filmen, såsom sk�
 index.html: Huvudstruktur för webbapplikationen.
 style.css: CSS-stilar för hela sidan.
 script.js: JavaScript som hanterar logik för att hämta data från API, söka filmer, hantera favoriter och växla mellan mörkt och ljust läge.
+
+## Git / Github branches
+
+Använt en develop branch och gjort tre olika feature branches som jag gjorde en feature var i och sen mergade sen upp dom i develop branch och sen till sist develop branch -> main branch.
