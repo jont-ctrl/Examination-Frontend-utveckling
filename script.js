@@ -197,6 +197,10 @@ favoriteTab.addEventListener('click', () => {
 
   getFavLocal();
 
+  const mainTitleFavorites = document.createElement('h2');
+  mainTitleFavorites.textContent = 'Dina favoriter';
+  document.querySelector('.buttonsNav').append(mainTitleFavorites);
+
   // Render and append items from favorites array
   favorites.forEach((element) => {
     const newDiv = document.createElement('div');
