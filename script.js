@@ -436,6 +436,7 @@ async function readMore(movieID) {
     console.log(data);
   } catch (error) {
     console.error('Error read more fetch: ', error);
+    movieArea.innerHTML = '';
     const newError = document.createElement('h2');
     newError.textContent = 'Något gick fel, försök igen senare.';
     newError.classList.add('movieCard');
