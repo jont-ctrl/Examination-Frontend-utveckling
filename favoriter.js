@@ -1,3 +1,5 @@
+import config from './config.js';
+
 const darkMode = document.querySelector('#darkMode');
 const main = document.querySelector('main');
 const movieArea = document.querySelector('.movieArea');
@@ -21,9 +23,6 @@ darkMode.addEventListener('click', () => {
 let movies = [];
 let favorites = [];
 
-// Api fetch
-const apiKi = 'b43ebaaf';
-
 // Default search '= x'
 async function getMovies(search = 'spider-man') {
   // Clearing movieCard div before adding new elements
@@ -36,7 +35,7 @@ async function getMovies(search = 'spider-man') {
 
   try {
     const response = await fetch(
-      `https://www.omdbapi.com/?apikey=${apiKi}&s=${search}`
+      `https://www.omdbapi.com/?apikey=${config.OMDB_API_KEY}&s=${search}`
     );
     const data = await response.json();
     console.log(data);
@@ -327,7 +326,7 @@ function updateFavTabText() {
 async function readMore(movieID) {
   try {
     const response = await fetch(
-      `https://www.omdbapi.com/?i=${movieID}&plot=full&apikey=${apiKi}`
+      `https://www.omdbapi.com/?i=${movieID}&plot=full&apikey=${config.OMDB_API_KEY}`
     );
     const data = await response.json();
 
