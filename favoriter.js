@@ -325,10 +325,26 @@ function updateFavTabText() {
 // Read more movie full view
 async function readMore(movieID) {
   try {
-    const response = await fetch(
-      `https://www.omdbapi.com/?i=${movieID}&plot=full&apikey=${config.OMDB_API_KEY}`
-    );
-    const data = await response.json();
+    console.log(movieID, 'HEREEEE');
+
+    // Skapa två fetch-anrop som hämtar data från OMDB och TMDB parallellt
+    const omdbApiUrl = `https://www.omdbapi.com/?i=${movieID}&plot=full&apikey=${config.OMDB_API_KEY}`;
+    const tmdbApiUrl = `https://api.themoviedb.org/3/movie/${movieID}?api_key=${config.TMDB_API_KEY}&language=en-US`;
+
+    // Använd Promise.all för att vänta på båda anropen samtidigt
+    const [omdbResponse, tmdbResponse] = await Promise.all([
+      fetch(omdbApiUrl),
+      fetch(tmdbApiUrl),
+    ]);
+
+    // Vänta på att både OMDB och TMDB returnerar JSON-data
+    const omdbData = await omdbResponse.json();
+    const tmdbData = await tmdbResponse.json();
+
+    // Kontrollera om båda API:erna returnerar korrekt data
+    if (omdbData.Response === 'False' || tmdbData.status_code) {
+      throw new Error('Data kunde inte hämtas');
+    }
 
     // Clearing movieCard div before adding new elements
     if (document.querySelector('.movieCard')) {
@@ -342,51 +358,76 @@ async function readMore(movieID) {
       document.querySelector('#mainTitleFavorites').remove();
     }
 
+    console.log('NYA DATA: ', 'omdb:', omdbData, 'tmdb', tmdbData);
+
     // Create all elements
     const newDiv = document.createElement('div');
     newDiv.classList.add('fullMovie');
 
     const newTitle = document.createElement('h2');
     newTitle.id = 'fullMovieH2';
-    newTitle.textContent = `${data.Title} (${data.Year})`;
+    newTitle.textContent = `${omdbData.Title} (${omdbData.Year})`;
 
     const newImagePoster = document.createElement('img');
     newImagePoster.classList.add('fullMoviePoster');
-    newImagePoster.src = data.Poster;
+    newImagePoster.src = omdbData.Poster;
     // Add alt text to image
-    newImagePoster.alt = `${data.Title} film poster`;
+    newImagePoster.alt = `${omdbData.Title} film poster`;
 
     const newActorstxt = document.createElement('p');
     newActorstxt.id = 'actorsTxt';
-    newActorstxt.textContent = `Actors: ${data.Actors}`;
+    newActorstxt.textContent = `Actors: ${omdbData.Actors}`;
 
     const yearRelease = document.createElement('p');
     yearRelease.id = 'yearRelease';
-    yearRelease.textContent = `Released: ${data.Released} `;
+    yearRelease.textContent = `Released: ${omdbData.Released} `;
 
     const movieLength = document.createElement('p');
     movieLength.id = 'movieLength';
-    movieLength.textContent = `Runtime: ${data.Runtime}`;
+    movieLength.textContent = `Runtime: ${omdbData.Runtime}`;
 
     const movieAwards = document.createElement('p');
     movieAwards.id = 'movieAwards';
-    movieAwards.textContent = `Awards: ${data.Awards}`;
+    movieAwards.textContent = `Awards: 🏆 ${omdbData.Awards}`;
 
     const moviePlot = document.createElement('p');
     moviePlot.id = 'moviePlot';
-    moviePlot.textContent = `${data.Plot}`;
+    moviePlot.textContent = `${omdbData.Plot}`;
 
     const ratingIMDB = document.createElement('h2');
     ratingIMDB.id = 'ratingIMDB';
-    ratingIMDB.textContent = `⭐ ${data.imdbRating} (${data.imdbVotes})`;
+    ratingIMDB.textContent = `⭐ ${omdbData.imdbRating} (${omdbData.imdbVotes})`;
 
     const movieGenre = document.createElement('p');
     movieGenre.id = 'movieGenre';
-    movieGenre.textContent = `Genre: ${data.Genre}`;
+    movieGenre.textContent = `Genre: ${omdbData.Genre}`;
 
     const boxOffice = document.createElement('p');
     boxOffice.id = 'boxOffice';
-    boxOffice.textContent = `Boxoffice: 💵 ${data.BoxOffice}`;
+    boxOffice.textContent = `Boxoffice: 🎟️ ${omdbData.BoxOffice}`;
+
+    // TMDB movie information
+    const tmdbBackdrop = document.createElement('img');
+    tmdbBackdrop.classList.add('movieBackdrop');
+    tmdbBackdrop.src = `https://image.tmdb.org/t/p/w1280${tmdbData.backdrop_path}`;
+    tmdbBackdrop.alt = `${tmdbData.original_title} film poster`;
+
+    const tmdbBackdrop2 = document.createElement('img');
+    tmdbBackdrop2.classList.add('movieBackdrop');
+    tmdbBackdrop2.src = `https://image.tmdb.org/t/p/w1280${tmdbData.poster_path}`;
+    tmdbBackdrop2.alt = `${tmdbData.original_title} film poster`;
+
+    const tmdbBudget = document.createElement('p');
+    tmdbBudget.id = 'tmdbBudget';
+    tmdbBudget.textContent = `Budget: 🧾 $${tmdbData.budget}`;
+
+    const tmdbRevenue = document.createElement('p');
+    tmdbRevenue.id = 'tmdbRevenue';
+    tmdbRevenue.textContent = `Revenue: 💵 $${tmdbData.revenue}`;
+
+    const tmdbTagline = document.createElement('h3');
+    tmdbTagline.id = 'tmdbTagline';
+    tmdbTagline.textContent = tmdbData.tagline;
 
     // Favorite button
     const newFavoriteBtn = document.createElement('button');
@@ -400,7 +441,7 @@ async function readMore(movieID) {
     let isFavorited = false;
 
     // check if movie already favorited, some returns true/false instead of .filter
-    if (favorites.some((fav) => fav.imdbID === data.imdbID)) {
+    if (favorites.some((fav) => fav.imdbID === omdbData.imdbID)) {
       console.log('TRUE Finns id redan');
       isFavorited = true;
       newFavoriteBtn.innerHTML = '<span class="material-icons">favorite</span>';
@@ -413,7 +454,7 @@ async function readMore(movieID) {
         // Remove favorite
 
         isFavorited = false;
-        removeFavorite(data.imdbID);
+        removeFavorite(omdbData.imdbID);
 
         newFavoriteBtn.innerHTML =
           '<span class="material-symbols-outlined">favorite</span>';
@@ -421,7 +462,7 @@ async function readMore(movieID) {
         // Add favorite
 
         isFavorited = true;
-        addFavorite(data);
+        addFavorite(omdbData);
         newFavoriteBtn.innerHTML =
           '<span class="material-icons">favorite</span>';
       }
@@ -440,11 +481,16 @@ async function readMore(movieID) {
       movieGenre,
       movieAwards,
       newActorstxt,
+      tmdbBudget,
 
-      boxOffice
+      boxOffice,
+      tmdbRevenue,
+      tmdbTagline,
+      tmdbBackdrop,
+      tmdbBackdrop2
     );
 
-    console.log(data);
+    console.log(omdbData);
   } catch (error) {
     console.error('Error read more fetch: ', error);
     movieArea.innerHTML = '';
