@@ -24,7 +24,7 @@ let movies = [];
 let favorites = [];
 
 // Default search '= x'
-async function getMovies(search = 'movie') {
+async function getMovies(search = 'spider man') {
   // Clearing movieCard div before adding new elements
   if (document.querySelector('.movieCard')) {
     movieArea.innerHTML = '';
