@@ -25,7 +25,7 @@ let favorites = [];
 const apiKi = 'b43ebaaf';
 
 // Default search '= x'
-async function getMovies(search = 'spider-man') {
+async function getMovies(search = 'movie') {
   // Clearing movieCard div before adding new elements
   if (document.querySelector('.movieCard')) {
     movieArea.innerHTML = '';
