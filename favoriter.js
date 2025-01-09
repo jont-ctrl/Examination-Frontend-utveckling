@@ -26,7 +26,6 @@ const apiKi = 'b43ebaaf';
 
 // Default search '= x'
 async function getMovies(search = 'spider-man') {
-  window.location.href = 'index.html'; // Navigerar till index.html
   // Clearing movieCard div before adding new elements
   if (document.querySelector('.movieCard')) {
     movieArea.innerHTML = '';
