@@ -91,6 +91,10 @@ input {
   padding: 0.5rem 2rem;
 }
 
+.buttonsNav a {
+  text-decoration: none;
+}
+
 img {
   border-radius: 1rem;
 }
