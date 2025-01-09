@@ -28,6 +28,8 @@ https://www.figma.com/design/o92bYqqQkEMpWMZxpI1KoF/FilmSamlaren?node-id=0-1&t=q
 
 Filmdatainformation hämtas från publika OMDb API med en gratis api nyckel.
 https://www.omdbapi.com/
+och TMDB API
+https://developer.themoviedb.org/reference/intro/getting-started
 
 URL endpoints använts är sökning efter filmer: /apiKey&s={searchTerm}
 och detaljer om en specifik film: /apiKey&i={imdbID}&plot=full
