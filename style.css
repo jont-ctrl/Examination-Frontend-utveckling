@@ -190,6 +190,12 @@ button:active,
   margin-bottom: 2rem;
 }
 
+.movieBackdrop {
+  width: 100%;
+  border-radius: 1rem;
+  margin: 1rem;
+}
+
 @media (max-width: 970px) {
   .movieArea {
     grid-template-columns: 1fr 1fr;
